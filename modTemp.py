@@ -21,8 +21,8 @@ def updateDate():
 
 def updateData():
     concName = nameCreator()
-    with open(concName) as f:
-        lines = list(f)
+    #with open(concName) as f:
+    #    lines = list(f)
     
     #print lines
     
@@ -30,17 +30,30 @@ def updateData():
     measuredTimes = []
     measuredTemps = []
     measuredHmdty = []
+    
+    #read the file line by line
+    with open(concName) as f:
+        for e in f:
+            if len(e) > 2:
+                #print e[0]
+                if e[0] != 'D' and e[0] != 'T':
+                    #print e
+                    measuredTimes.append(str(e[0:8]))
+                    #this line splits the element into a list at character ','
+                    var = (e[9:-1]).rsplit(',', 1)
+                    measuredTemps.append(float(var[0]))
+                    measuredHmdty.append(float(var[1]))
 
-    for e in lines:
-        if len(e) > 2:
-            #print e[0]
-            if e[0] != 'D' and e[0] != 'T':
-                #print e
-                measuredTimes.append(str(e[0:8]))
-                #this line splits the element into a list at character ','
-                var = (e[9:-1]).rsplit(',', 1)
-                measuredTemps.append(float(var[0]))
-                measuredHmdty.append(float(var[1]))
+    # for e in lines:
+    #     if len(e) > 2:
+    #         #print e[0]
+    #         if e[0] != 'D' and e[0] != 'T':
+    #             #print e
+    #             measuredTimes.append(str(e[0:8]))
+    #             #this line splits the element into a list at character ','
+    #             var = (e[9:-1]).rsplit(',', 1)
+    #             measuredTemps.append(float(var[0]))
+    #             measuredHmdty.append(float(var[1]))
 
     configTemp.timeData = measuredTimes
     configTemp.tempData = measuredTemps

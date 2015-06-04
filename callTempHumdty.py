@@ -4,4 +4,4 @@ import modTemp
 
 modTemp. updateTime()
 h, t = dht.read_retry(dht.DHT22, 4)
-tempLibrary.tempLibrary(h,t)
+tempLibrary.tempLibrary(t,h)
